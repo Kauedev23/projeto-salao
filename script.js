@@ -3,7 +3,7 @@
 const SUPABASE_URL = 'https://zjyrtblttwtqjctqipnt.supabase.co'; // Ex: 'https://abcdefghijklmnop.supabase.co'
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpqeXJ0Ymx0dHd0cWpjdHFpcG50Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTAwODY3NDcsImV4cCI6MjA2NTY2Mjc0N30.7MkR9xCRBSXpXveBSiRYyouXIPEqPnD-qtJHknp6jE0'; // Ex: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
 
-const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const supabase = window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
 
 // Elementos do DOM
 const authSection = document.getElementById('auth-section');
@@ -193,19 +193,18 @@ authForm.addEventListener('submit', async (e) => {
 
             if (data.user) {
                 // Inserir o perfil na tabela 'users'
-                const { error: profileError } = await supabase
-                    .from('users')
-                    .insert([
-                        { id: data.user.id, email: data.user.email, nome: name, perfil: 'morador' }
-                    ]);
+                const { user } = session; // ou use o retorno do signUp
 
-                if (profileError) {
-                    // Se der erro ao inserir o perfil, talvez seja necessário apagar o usuário do auth
-                    console.error('Erro ao inserir perfil:', profileError);
-                    showAlert('Erro ao completar o cadastro. Tente novamente.', 'danger');
-                    // Opcional: supabase.auth.admin.deleteUser(data.user.id) para limpar
-                    return;
-                }
+                await supabase
+                  .from('users')
+                  .insert([
+                    {
+                      id: user.id, // o mesmo id do Auth
+                      nome: nameInput.value,
+                      perfil: 'morador' // ou outro perfil padrão
+                    }
+                  ]);
+
                 showAlert('Cadastro realizado com sucesso! Verifique seu email para confirmar.', 'success');
                 // Após o cadastro, pode-se logar ou esperar a confirmação do email
                 isRegistering = false;
@@ -256,7 +255,7 @@ async function getUserProfile(userId) {
         .from('users')
         .select('perfil, nome')
         .eq('id', userId)
-        .single();
+        .maybeSingle(); // Troque .single() por .maybeSingle()
 
     if (error) {
         console.error('Erro ao buscar perfil do usuário:', error.message);
@@ -851,7 +850,7 @@ async function loadAllBookingsHistory() {
 // --- Inicialização ---
 
 // Verifica o usuário logado ao carregar a página
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     checkUserAndRedirect();
 
     // Adiciona evento de escuta para alterações no estado de autenticação
