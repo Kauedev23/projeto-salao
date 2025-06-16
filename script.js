@@ -883,4 +883,22 @@ document.addEventListener('DOMContentLoaded', function() {
         authSection.style.display = 'none';
         loadAdminDashboard();
     });
+
+    // Botão de logout do morador
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', async function() {
+            await supabase.auth.signOut();
+            window.location.reload();
+        });
+    }
+
+    // Botão de logout do admin
+    const logoutBtnAdmin = document.getElementById('logout-btn-admin');
+    if (logoutBtnAdmin) {
+        logoutBtnAdmin.addEventListener('click', async function() {
+            await supabase.auth.signOut();
+            window.location.reload();
+        });
+    }
 });

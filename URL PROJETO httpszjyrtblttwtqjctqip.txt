@@ -1,0 +1,12 @@
+URL PROJETO: https://zjyrtblttwtqjctqipnt.supabase.co
+
+
+API KEY ANON: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpqeXJ0Ymx0dHd0cWpjdHFpcG50Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTAwODY3NDcsImV4cCI6MjA2NTY2Mjc0N30.7MkR9xCRBSXpXveBSiRYyouXIPEqPnD-qtJHknp6jE0
+
+
+Para commit: 
+
+cd "c:\Users\42868635814\Documents\PROJETOSALAO"  
+git add .
+git commit -m "nome commit"
+git push
