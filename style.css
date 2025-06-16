@@ -163,11 +163,115 @@ tbody tr:hover {
 /* Responsividade */
 @media (max-width: 768px) {
     .container {
-        width: 95%;
+        width: 100%;
+        padding: 0 5px;
     }
 
-    #auth-section {
-        width: 95%;
-        margin: 20px auto;
+    #auth-section,
+    #resident-dashboard,
+    #admin-dashboard {
+        width: 100%;
+        margin: 10px 0;
+        padding: 10px 2vw;
+        box-sizing: border-box;
+    }
+
+    .navbar {
+        padding: 10px 0;
+        font-size: 1em;
+    }
+
+    .navbar-brand {
+        font-size: 1.1em;
+    }
+
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+        width: 100%;
+    }
+
+    thead tr {
+        display: none;
+    }
+
+    tbody tr {
+        margin-bottom: 15px;
+        border-radius: 8px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        background: #fff;
+        padding: 8px 0;
+    }
+
+    td {
+        position: relative;
+        padding-left: 50%;
+        min-height: 30px;
+        border: none;
+        border-bottom: 1px solid #eee;
+        text-align: left;
+    }
+
+    td:before {
+        position: absolute;
+        top: 8px;
+        left: 10px;
+        width: 45%;
+        white-space: nowrap;
+        font-weight: bold;
+        color: #888;
+        font-size: 0.97em;
+    }
+
+    /* Labels para cada coluna (ajuste conforme suas tabelas) */
+    #my-bookings-list td:nth-child(1):before { content: "Data"; }
+    #my-bookings-list td:nth-child(2):before { content: "Horário"; }
+    #my-bookings-list td:nth-child(3):before { content: "Status"; }
+    #my-bookings-list td:nth-child(4):before { content: "Solicitado em"; }
+
+    #pending-bookings-list td:nth-child(1):before { content: "Nome"; }
+    #pending-bookings-list td:nth-child(2):before { content: "Email"; }
+    #pending-bookings-list td:nth-child(3):before { content: "Data"; }
+    #pending-bookings-list td:nth-child(4):before { content: "Horário"; }
+    #pending-bookings-list td:nth-child(5):before { content: "Status"; }
+    #pending-bookings-list td:nth-child(6):before { content: "Solicitado em"; }
+    #pending-bookings-list td:nth-child(7):before { content: "Ações"; }
+
+    #blocked-dates-list td:nth-child(1):before { content: "Data"; }
+    #blocked-dates-list td:nth-child(2):before { content: "Motivo"; }
+    #blocked-dates-list td:nth-child(3):before { content: "Ações"; }
+
+    #all-bookings-history-list td:nth-child(1):before { content: "Nome"; }
+    #all-bookings-history-list td:nth-child(2):before { content: "Email"; }
+    #all-bookings-history-list td:nth-child(3):before { content: "Data"; }
+    #all-bookings-history-list td:nth-child(4):before { content: "Horário"; }
+    #all-bookings-history-list td:nth-child(5):before { content: "Status"; }
+    #all-bookings-history-list td:nth-child(6):before { content: "Solicitado em"; }
+
+    /* Botões ocupando largura total */
+    button, .btn {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+
+    /* Calendário responsivo */
+    .fc {
+        font-size: 0.95em;
+    }
+}
+
+/* Pequenas melhorias para telas muito pequenas */
+@media (max-width: 480px) {
+    #auth-section,
+    #resident-dashboard,
+    #admin-dashboard {
+        padding: 5px 1vw;
+    }
+    .navbar-brand {
+        font-size: 1em;
     }
 }
